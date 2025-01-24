@@ -1,7 +1,7 @@
 /**** STATE ****/
 let contactList = []
 let contactToEditId = null
-let contactId = 3
+let contactId = 2
 
 /**** RENDERING & LISTENING ****/
 const contactsContainer = document.getElementById("contacts-container")
@@ -61,8 +61,9 @@ function renderContactForm(contactData) {
 /*** When the save button is clicked, either save an edit or a create*/
 async function onSaveContactClick(event) {
     event.preventDefault()
-    const nextId = contactId + 1;
-    
+    const maxId = existingContacts.length > 0 ? Math.max(...existingContacts.map(c => c.id)) : 0;
+    const nextId = maxId + 1; // Assign the next available ID
+
     const contactData = {
         id: nextId, 
         Name: nametextarea.value,
