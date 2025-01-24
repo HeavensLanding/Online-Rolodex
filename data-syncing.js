@@ -90,3 +90,33 @@ async function onSaveContactClick(event) {
     // Clear the form
     renderContactForm({text: "" })
 }
+
+/**** FETCHING ****/
+
+async function fetchAllContacts() {
+    const response = await fetch("http://localhost:3000/contact")
+    return response.json()
+}
+
+async function postContact(newContactData) {
+    const response = await fetch("http://localhost:3000/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newContactData)
+    })
+    return response.json()
+}
+
+async function putContact(updatedContact) {
+    await fetch("http://localhost:3000/contact/" + updatedContact.id, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedContact)
+    })
+}
+
+async function deleteContact(idToDelete) {
+    await fetch("http://localhost:3000/contact/" + idToDelete, {
+        method: "DELETE"
+    })
+}
