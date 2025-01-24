@@ -58,3 +58,35 @@ function renderContactForm(contactData) {
     textarea.value = contactData.text
 }
 
+/*** When the save button is clicked, either save an edit or a create*/
+async function onSaveContactClick(event) {
+    event.preventDefault()
+    const contactData = {
+        Name: nametextarea.value,
+        contactId: contactId,
+        PhoneNumber: pntextarea.value,
+        Email: emailtextarea.value,
+        Address: addresstextarea.value,
+    }
+
+    if(contactToEditId !== null) {
+        // Update on backend
+        contactData.id = contactToEditId
+        await putContact(contactData)
+
+        // Update on frontend
+        const indexToReplace = contactList.findIndex(r => r.id === contactToEditId)
+        contactList[indexToReplace] = contactData
+    } else {
+        // Update on backend
+        const createdContact = await postContact(contactData)
+
+        // Update on frontend
+        contactList.push(createdContact)
+    }
+
+    renderContactsList()
+    contactToEditId = null
+    // Clear the form
+    renderContactForm({text: "" })
+}
