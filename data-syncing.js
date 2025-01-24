@@ -51,3 +51,10 @@ function renderContact(contact) {
     })
     return contactDiv
 }
+
+
+/**Update the contact form to match the contact data given*/
+function renderContactForm(contactData) {
+    textarea.value = contactData.text
+}
+
