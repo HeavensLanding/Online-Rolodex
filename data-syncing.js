@@ -120,3 +120,13 @@ async function deleteContact(idToDelete) {
         method: "DELETE"
     })
 }
+
+/**** START UP ****/
+
+async function startUp() {
+    renderContactList()
+    contactList = await fetchAllContacts()
+    renderContactList()
+}
+
+startUp()
