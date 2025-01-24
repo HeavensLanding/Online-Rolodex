@@ -1,17 +1,18 @@
-{  "Contact": [
+{
+  "contact": [
     {
-      "id": "1",
-      "Name": "Natalie",
-      "Phone Number": "123-456-7890",
-      "Email": "natalie@gmail.com",
-      "Address": "123 State Street"
+      "contactId": "1",
+      "name": "Natalie",
+      "phone number": "123-456-7890",
+      "email": "natalie@gmail.com",
+      "address": "123 State Street"
     },
     {
-      "id": "2",
-      "Name": "Amy",
-      "Phone Number": "123-456-7890",
-      "Email": "amy@gmail.com",
-      "Address": "456 Central Avenue"
+      "contactId": "2",
+      "name": "Amy",
+      "phone number": "123-456-7890",
+      "email": "amy@gmail.com",
+      "address": "456 Central Avenue"
     }
   ]
 }

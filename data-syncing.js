@@ -1,7 +1,7 @@
 /**** STATE ****/
 let contactList = []
 let contactToEditId = null
-let contactId = 2
+let contactId = 3
 
 /**** RENDERING & LISTENING ****/
 const contactsContainer = document.getElementById("contacts-container")
@@ -61,9 +61,11 @@ function renderContactForm(contactData) {
 /*** When the save button is clicked, either save an edit or a create*/
 async function onSaveContactClick(event) {
     event.preventDefault()
+    const nextId = contactId + 1;
+    
     const contactData = {
+        id: nextId, 
         Name: nametextarea.value,
-        contactId: contactId,
         PhoneNumber: pntextarea.value,
         Email: emailtextarea.value,
         Address: addresstextarea.value,
@@ -124,7 +126,6 @@ async function deleteContact(idToDelete) {
 /**** START UP ****/
 
 async function startUp() {
-    renderContactList()
     contactList = await fetchAllContacts()
     renderContactList()
 }
