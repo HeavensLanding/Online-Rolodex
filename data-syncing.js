@@ -51,7 +51,7 @@ function renderContact(contact) {
     })
     return contactDiv
 }
-
+/**test */
 
 /**Update the contact form to match the contact data given*/
 function renderContactForm(contactData) {
