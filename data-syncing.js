@@ -18,7 +18,7 @@ function renderContactsList() {
     }
 
     // For each contact, map it to a div, then append that div to the container
-    contactList.map(renderContactsList).forEach(div => contactsContainer.appendChild(div))
+    contactList.map(renderContact).forEach(div => contactsContainer.appendChild(div))
 }
 
 /**Render one contact*/
@@ -51,7 +51,7 @@ function renderContact(contact) {
     })
     return contactDiv
 }
-/**test */
+/*
 
 /**Update the contact form to match the contact data given*/
 function renderContactForm(contactData) {
@@ -61,15 +61,15 @@ function renderContactForm(contactData) {
 /*** When the save button is clicked, either save an edit or a create*/
 async function onSaveContactClick(event) {
     event.preventDefault()
-    const maxId = existingContacts.length > 0 ? Math.max(...existingContacts.map(c => c.id)) : 0;
+    const maxId = contactList.length > 0 ? Math.max(...contactList.map(c => c.id)) : 0;
     const nextId = maxId + 1; // Assign the next available ID
 
     const contactData = {
         id: nextId, 
-        Name: nametextarea.value,
-        PhoneNumber: pntextarea.value,
-        Email: emailtextarea.value,
-        Address: addresstextarea.value,
+        Name: document.getElementById("nametextarea").value.trim(), 
+        phoneNumber: document.getElementById("pntextarea").value.trim(), 
+        email: document.getElementById("emailtextarea").value.trim(), 
+        address: document.getElementById("addresstextarea").value.trim()
     }
 
     if(contactToEditId !== null) {
@@ -128,7 +128,7 @@ async function deleteContact(idToDelete) {
 
 async function startUp() {
     contactList = await fetchAllContacts()
-    renderContactList()
+    renderContactsList()
 }
 
 startUp()
