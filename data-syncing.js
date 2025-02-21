@@ -1,14 +1,13 @@
 /**** STATE ****/
 let contactList = []
 let contactToEditId = null
-let contactId = 2
 
 /**** RENDERING & LISTENING ****/
 const contactsContainer = document.getElementById("contacts-container")
 const textarea = document.getElementById("textarea")
 
 /** Render a list of contacts */
-function renderContactsList() {
+function renderContactList() {
     // Clear out anything from previous renders
     contactsContainer.innerHTML = ""
 
@@ -35,16 +34,17 @@ function renderContact(contact) {
     `
     // Attach the event listener to the edit button that gets the form ready to edit
     contactDiv.querySelector("#edit-button").addEventListener("click", () => {
+        console.log(`Editing contact with ID: ${contact.id}`)
         contactToEditId = contact.id
         renderContactForm(contact)
     })
-    // Attach the event listener to the delete button that deletes the review
+    // Attach the event listener to the delete button that deletes the contact
     contactDiv.querySelector("#delete-button").addEventListener("click", async () => {
-        
+        console.log(`Deleting contact with ID: ${contact.id}`);
         // Delete on the backend first
         await deleteContact(contact.id)
         // Delete on the frontend
-        const indexToDelete = contactList.indexOf(contact)
+        const indexToDelete = contactList.indexOf(contact);
         contactList.splice(indexToDelete, 1)
 
         renderContactList()
@@ -55,19 +55,21 @@ function renderContact(contact) {
 
 /**Update the contact form to match the contact data given*/
 function renderContactForm(contactData) {
-    textarea.value = contactData.text
+    document.getElementById("nametextarea").value = contactData.name || '';
+    document.getElementById("pntextarea").value = contactData.phonenumber || '';
+    document.getElementById("emailtextarea").value = contactData.email || '';
+    document.getElementById("addresstextarea").value = contactData.address || '';
 }
 
 /*** When the save button is clicked, either save an edit or a create*/
 async function onSaveContactClick(event) {
     event.preventDefault()
-    const maxId = contactList.length > 0 ? Math.max(...contactList.map(c => c.id)) : 0;
-    const nextId = maxId + 1; // Assign the next available ID
+    const nextId = contactList.length > 0 ? Math.max(...contactList.map(c => c.id)) + 1 : 1; // Assign the next available ID
 
     const contactData = {
         id: nextId, 
-        Name: document.getElementById("nametextarea").value.trim(), 
-        phoneNumber: document.getElementById("pntextarea").value.trim(), 
+        name: document.getElementById("nametextarea").value.trim(), 
+        phonenumber: document.getElementById("pntextarea").value.trim(), 
         email: document.getElementById("emailtextarea").value.trim(), 
         address: document.getElementById("addresstextarea").value.trim()
     }
@@ -78,7 +80,7 @@ async function onSaveContactClick(event) {
         await putContact(contactData)
 
         // Update on frontend
-        const indexToReplace = contactList.findIndex(r => r.id === contactToEditId)
+        const indexToReplace = contactList.findIndex(c => c.id === contactToEditId)
         contactList[indexToReplace] = contactData
     } else {
         // Update on backend
@@ -88,7 +90,7 @@ async function onSaveContactClick(event) {
         contactList.push(createdContact)
     }
 
-    renderContactsList()
+    renderContactList()
     contactToEditId = null
     // Clear the form
     renderContactForm({text: "" })
@@ -118,8 +120,9 @@ async function putContact(updatedContact) {
     })
 }
 
-async function deleteContact(idToDelete) {
-    await fetch("http://localhost:3000/contact/" + idToDelete, {
+async function deleteContact(id) {
+    console.log("Received request to delete contact with ID:", id);
+    await fetch(`http://localhost:3000/contact/${id}`, {
         method: "DELETE"
     })
 }
@@ -128,7 +131,7 @@ async function deleteContact(idToDelete) {
 
 async function startUp() {
     contactList = await fetchAllContacts()
-    renderContactsList()
+    renderContactList()
 }
 
 startUp()

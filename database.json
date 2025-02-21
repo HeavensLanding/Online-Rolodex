@@ -1,41 +1,18 @@
 {
   "contact": [
     {
-      "contactId": "1",
-      "name": "Natalie",
-      "phone number": "123-456-7890",
-      "email": "natalie@gmail.com",
-      "address": "123 State Street",
-      "id": "0760"
-    },
-    {
-      "contactId": "2",
-      "name": "Amy",
-      "phone number": "123-456-7890",
+      "id": 1,
+      "name": "Amy DeWidt",
+      "phonenumber": "123-456-7890",
       "email": "amy@gmail.com",
-      "address": "456 Central Avenue",
-      "id": "9664"
+      "address": "123 Main Street"
     },
     {
-      "id": 9665,
-      "Name": "qwer",
-      "PhoneNumber": "qwer",
-      "Email": "qwergf",
-      "Address": "qwer"
-    },
-    {
-      "id": 9666,
-      "Name": "4rty",
-      "PhoneNumber": "qwer",
-      "Email": "rty",
-      "Address": "r5ty"
-    },
-    {
-      "id": 9667,
-      "Name": "ertyj",
-      "phoneNumber": "werty",
-      "email": "rtyj",
-      "address": "rthyj"
+      "id": 2,
+      "name": "Courtney Rasmussen",
+      "phonenumber": "123-456-7890",
+      "email": "courtney@gmail.com",
+      "address": "456 Main Street"
     }
   ]
 }
