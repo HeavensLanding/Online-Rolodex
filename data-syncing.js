@@ -67,7 +67,7 @@ async function onSaveContactClick(event) {
     const nextId = contactList.length > 0 ? Math.max(...contactList.map(c => c.id)) + 1 : 1; // Assign the next available ID
 
     const contactData = {
-        id: nextId, 
+        id: nextId.toString(), 
         name: document.getElementById("nametextarea").value.trim(), 
         phonenumber: document.getElementById("pntextarea").value.trim(), 
         email: document.getElementById("emailtextarea").value.trim(), 
